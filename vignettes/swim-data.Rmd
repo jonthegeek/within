@@ -25,15 +25,13 @@ We collect reports from people who went for a swim by asking this question:
 The data usually comes as a CSV file, which we read into a data frame.
 
 ```{r clean-data}
-library(tidyverse)
-
 infile <- "swim.csv"
-original_dat <- read_csv(
+original_dat <- readr::read_csv(
   infile,
-  col_types = cols(name = "c", where = "c", temp = "d")
+  col_types = readr::cols(name = "c", where = "c", temp = "d")
 )
 
-lookup_table <- tribble(
+lookup_table <- dplyr::tribble(
   ~where,     ~english,
   "beach",    "US",
   "coast",    "US",
@@ -42,11 +40,11 @@ lookup_table <- tribble(
 )
 
 dat <- original_dat %>%
-  left_join(lookup_table, by = "where")
+  dplyr::left_join(lookup_table, by = "where")
 
 dat <- dat %>%
-  mutate(
-    temp = if_else(
+  dplyr::mutate(
+    temp = dplyr::if_else(
       english == "US",
       (temp - 32) * 5/9,
       temp
@@ -62,5 +60,5 @@ outfile <- paste0(
   "_",
   cleaned_path
 )
-write_csv(dat, outfile)
+readr::write_csv(dat, outfile)
 ```
