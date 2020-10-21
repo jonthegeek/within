@@ -1,0 +1,26 @@
+---
+title: "Cleaning Swim Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Cleaning Swim Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(within)
+```
+
+We collect reports from people who went for a swim by asking this question:
+
+> Where did you swim and how hot was it outside?
+
+The data usually comes as a CSV file, which we read into a data frame.
+
