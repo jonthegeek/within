@@ -31,16 +31,8 @@ original_dat <- readr::read_csv(
   col_types = readr::cols(name = "c", where = "c", temp = "d")
 )
 
-lookup_table <- dplyr::tribble(
-  ~where,     ~english,
-  "beach",    "US",
-  "coast",    "US",
-  "seashore", "UK",
-  "seaside",  "UK"
-)
-
-dat <- original_dat %>%
-  dplyr::left_join(lookup_table, by = "where")
+dat <- original_dat %>% 
+  localize_beach()
 
 dat <- dat %>%
   dplyr::mutate(
@@ -52,6 +44,11 @@ dat <- dat %>%
   )
 dat
 
+```
+
+And then we write the data to a standard filename.
+
+```{r write-data}
 now <- Sys.time()
 timestamp <- format(now, "%Y-%m-%d_%H-%M-%S")
 cleaned_path <- sub("(.*)([.]csv$)", "\\1_clean\\2", infile)
@@ -61,4 +58,5 @@ outfile <- paste0(
   cleaned_path
 )
 readr::write_csv(dat, outfile)
+
 ```
