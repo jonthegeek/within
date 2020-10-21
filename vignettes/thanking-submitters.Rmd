@@ -1,0 +1,30 @@
+---
+title: "Thanking Submitters"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Thanking Submitters}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(within)
+```
+
+We send a thanks when someone submits a temp.
+
+```{r sample-submission}
+submission <- dplyr::tibble(
+  name = "Frank",
+  where = "beach",
+  temp = 92
+) %>% 
+  clean_swim_data()
+```

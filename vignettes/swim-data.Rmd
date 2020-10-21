@@ -35,20 +35,20 @@ dat <- original_dat %>%
   localize_beach() %>% 
   celsify_temp()
 
+# Or you can do the same thing with clean_swim_data()
+dat2 <- original_dat %>% 
+  clean_swim_data()
+
+identical(dat, dat2)
+
 dat
 ```
 
 And then we write the data to a standard filename.
 
 ```{r write-data}
-now <- Sys.time()
-timestamp <- format(now, "%Y-%m-%d_%H-%M-%S")
-cleaned_path <- sub("(.*)([.]csv$)", "\\1_clean\\2", infile)
-outfile <- paste0(
-  timestamp,
-  "_",
-  cleaned_path
-)
-readr::write_csv(dat, outfile)
+outfile <- make_outfile_path(infile)
+outfile
 
+readr::write_csv(dat, outfile)
 ```

@@ -2,5 +2,7 @@
 
 export("%>%")
 export(celsify_temp)
+export(clean_swim_data)
 export(localize_beach)
+export(make_outfile_path)
 importFrom(magrittr,"%>%")

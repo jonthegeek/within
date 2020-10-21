@@ -26,3 +26,10 @@ celsify_temp <- function(dat) {
 .f_to_c <- function(temp) {
   (temp - 32) * 5/9
 }
+
+#' @export
+clean_swim_data <- function(dat) {
+  dat %>%
+    localize_beach() %>%
+    celsify_temp()
+}
