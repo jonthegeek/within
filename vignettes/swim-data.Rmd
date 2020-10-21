@@ -32,18 +32,10 @@ original_dat <- readr::read_csv(
 )
 
 dat <- original_dat %>% 
-  localize_beach()
+  localize_beach() %>% 
+  celsify_temp()
 
-dat <- dat %>%
-  dplyr::mutate(
-    temp = dplyr::if_else(
-      english == "US",
-      (temp - 32) * 5/9,
-      temp
-    )
-  )
 dat
-
 ```
 
 And then we write the data to a standard filename.

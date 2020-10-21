@@ -10,3 +10,19 @@ localize_beach <- function(original_dat) {
 
   return(dplyr::left_join(original_dat, lookup_table, by = "where"))
 }
+
+#' @export
+celsify_temp <- function(dat) {
+  dplyr::mutate(
+    dat,
+    temp = dplyr::if_else(
+      english == "US",
+      .f_to_c(temp),
+      temp
+    )
+  )
+}
+
+.f_to_c <- function(temp) {
+  (temp - 32) * 5/9
+}
